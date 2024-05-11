@@ -1,7 +1,17 @@
 const express = require("express");
 const Joi = require("joi");
+const logger = require("./logger");
+const auth = require("./auth");
+const helmet = require("helmet");
+const morgan = require("morgan");
+
 const app = express();
 app.use(express.json());
+app.use(logger);
+app.use(morgan("tiny"));
+app.use(helmet());
+app.use(auth);
+
 const port = process.env.PORT | 5000;
 const darslar = [
   {
